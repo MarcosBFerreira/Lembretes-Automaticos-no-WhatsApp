@@ -39,24 +39,21 @@ navegador = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install
 # Abrindo a página do Whatsapp
 navegador.get("https://web.whatsapp.com")
 
-# Controlando o erro de clicar num objeto que não existe
+# Controlando o erro ao escrever num objeto que não existe
 while ERROR:
     
     try:
 
-        # Clicando na barra de pesquisa do Whatsapp
-        navegador.find_element(By.XPATH,
-                               '/html/body/div[1]/div/div/div[4]/div/div[1]/div/div[2]/div[2]'
-                               '/div/div[1]/p').click()
+        # Escrevendo o nome do contato na barra de pesquisa e dando ENTER para abrir a conversa
+        navegador.find_element(By.XPATH,'/html/body/div[1]/div/div/div[4]/div/div[1]/div/div[2]/div[2]/'
+                               'div/div[1]/p').send_keys(f'{contato}', Keys.ENTER)
         ERROR = False
     
     except:
 
         pass
 
-# Escrevendo o nome do contato na barra de pesquisa e dando ENTER para abrir a conversa
-navegador.find_element(By.XPATH,'/html/body/div[1]/div/div/div[4]/div/div[1]/div/div[2]/div[2]/'
-                               'div/div[1]/p').send_keys(f'{contato}', Keys.ENTER)
+
 
 # Enviando infinitas mensagens para o contato
 while True:
